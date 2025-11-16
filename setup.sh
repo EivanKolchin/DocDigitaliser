@@ -20,10 +20,9 @@ if [[ -z "$primary_uri" ]]; then
     exit 1
 fi
 
-read -r -p "Enter the MongoDB connection string for the archive database: " archive_uri
+read -r -p "Enter the MongoDB connection string for the archive database (leave blank to reuse the primary URI): " archive_uri
 if [[ -z "$archive_uri" ]]; then
-    echo "Error: archive connection string cannot be empty" >&2
-    exit 1
+    archive_uri="$primary_uri"
 fi
 
 cat > "$ENV_FILE" <<EOF_ENV
